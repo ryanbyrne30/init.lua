@@ -1,3 +1,6 @@
+TODO: Explain installation setup and tools
+
+
 # Adding an LSP
 Follow the direction [here](https://github.com/VonHeikemen/lsp-zero.nvim) to
 setup and configure the LSP.
