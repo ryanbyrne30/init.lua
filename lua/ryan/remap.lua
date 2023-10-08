@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
--- delete to void register 
+-- delete to void register
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
@@ -36,3 +36,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- replace current word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- run golines
+vim.keymap.set("n", "<leader>fg", "<cmd>:%! $GOPATH/bin/golines<CR>:w<CR>")

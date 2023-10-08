@@ -25,6 +25,7 @@ lsp.format_on_save({
         ['templ'] = { 'templ' },
         ['lua_ls'] = { 'lua' },
         ['marksman'] = { 'markdown' },
+        ['taplo'] = { 'toml' },
     }
 })
 
@@ -35,6 +36,8 @@ lsp.format_on_save({
 -- setup mason & mason-lsp
 require("mason").setup()
 require("mason-lspconfig").setup()
+
+local util = require "lspconfig/util"
 
 -- setup language servers
 require('lspconfig').rust_analyzer.setup({})
@@ -47,13 +50,52 @@ require('lspconfig').lua_ls.setup({
         }
     }
 })
-require('lspconfig').gopls.setup({})
+require('lspconfig').templ.setup({})
+require('lspconfig').gopls.setup({
+    cmd = { "gopls", "serve" },
+    filetypes = { "go", "gomod" },
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+
+        },
+    },
+})
 require('lspconfig').html.setup({})
 require('lspconfig').pyright.setup({})
-require('lspconfig').templ.setup({})
 require('lspconfig').terraform_lsp.setup({})
 require('lspconfig').tsserver.setup({})
 require('lspconfig').marksman.setup({})
+require('lspconfig').taplo.setup({})
+require('lspconfig').tailwindcss.setup({
+    settings = {
+        tailwindCSS = {
+            experimental = {
+                classRegex = {
+                    "tailwind\\('([^)]*)\\')", "'([^']*)'",
+                    "([a-zA-Z0-9\\-:]+)",
+                },
+            },
+        },
+    },
+    --        settings = {
+    --        filetypes = { "html", "templ", "svelte", "typescriptreact", "react" },
+    --        root_dir = util.root_pattern("tailwind.config.js", "package.json", "go.work", "go.mod", ".git"),
+    --        tailwindCSS = {
+    --            experimental = {
+    --                classRegex = {
+    --                    "classList.(?:add|remove)\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)", -- DOM
+    --                    "(?:add|remove)Class\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)",      -- JQuery
+    --                    "class=\"([^\"]*)\"", "([a-zA-Z0-9\\-:]+)",                                -- HAML
+    --                },
+    --            },
+    --        },
+    --    },
+})
 
 -- create keybindings
 local cmp = require('cmp')
@@ -61,17 +103,17 @@ local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
     mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_action),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_action),
         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
     })
 })
 
--- local cmp_select = {behavior = cmp.SelectBehavior.Select}
+-- local cmp_action = {behavior = cmp.SelectBehavior.Select}
 -- local cmp_mappings = lsp.defaults.cmp_mappings({
--- ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
--- ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+-- ['<C-p>'] = cmp.mapping.select_prev_item(cmp_action),
+-- ['<C-n>'] = cmp.mapping.select_next_item(cmp_action),
 -- ['<C-y>'] = cmp.mapping.confirm({ select = true }),
 -- ['<C-Space>'] = cmp.mapping.complete(),
 -- })
