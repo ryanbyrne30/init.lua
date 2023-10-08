@@ -29,10 +29,6 @@ lsp.format_on_save({
     }
 })
 
--- lsp.set_preferences({
---     sign_icons = {}
--- })
-
 -- setup mason & mason-lsp
 require("mason").setup()
 require("mason-lspconfig").setup()
@@ -71,31 +67,7 @@ require('lspconfig').terraform_lsp.setup({})
 require('lspconfig').tsserver.setup({})
 require('lspconfig').marksman.setup({})
 require('lspconfig').taplo.setup({})
-require('lspconfig').tailwindcss.setup({
-    settings = {
-        tailwindCSS = {
-            experimental = {
-                classRegex = {
-                    "tailwind\\('([^)]*)\\')", "'([^']*)'",
-                    "([a-zA-Z0-9\\-:]+)",
-                },
-            },
-        },
-    },
-    --        settings = {
-    --        filetypes = { "html", "templ", "svelte", "typescriptreact", "react" },
-    --        root_dir = util.root_pattern("tailwind.config.js", "package.json", "go.work", "go.mod", ".git"),
-    --        tailwindCSS = {
-    --            experimental = {
-    --                classRegex = {
-    --                    "classList.(?:add|remove)\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)", -- DOM
-    --                    "(?:add|remove)Class\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)",      -- JQuery
-    --                    "class=\"([^\"]*)\"", "([a-zA-Z0-9\\-:]+)",                                -- HAML
-    --                },
-    --            },
-    --        },
-    --    },
-})
+require('lspconfig').tailwindcss.setup({})
 
 -- create keybindings
 local cmp = require('cmp')
@@ -109,11 +81,3 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete(),
     })
 })
-
--- local cmp_action = {behavior = cmp.SelectBehavior.Select}
--- local cmp_mappings = lsp.defaults.cmp_mappings({
--- ['<C-p>'] = cmp.mapping.select_prev_item(cmp_action),
--- ['<C-n>'] = cmp.mapping.select_next_item(cmp_action),
--- ['<C-y>'] = cmp.mapping.confirm({ select = true }),
--- ['<C-Space>'] = cmp.mapping.complete(),
--- })
