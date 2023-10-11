@@ -9,7 +9,6 @@ require('lspconfig').XX.setup({})
 
 
 
-
 where `XX` is an available LSP provided on this [list](https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 
 To allow formatting on save specify the file types to allow formatting in the
@@ -25,3 +24,5 @@ lsp.format_on_save({
     }
 })
 ```
+
+# Hello World!
