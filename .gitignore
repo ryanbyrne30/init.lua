@@ -1,2 +1,4 @@
 lazy-lock.json
 .netrwhist
+*.log
+ignore_me.txt
