@@ -4,6 +4,7 @@ require("ryan.colors")
 require("ryan.telescope")
 require("ryan.lsp")
 require("ryan.set")
+require("ryan.comment")
 
 local logo = [[
                               __
@@ -31,10 +32,7 @@ local logo = [[
     _.                      :
                             ;`-
                            :\
-                           ; 
+                           ;
 ]]
 
 print(logo)
-
-
-
