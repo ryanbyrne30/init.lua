@@ -26,6 +26,7 @@ lsp.format_on_save({
         ['lua_ls'] = { 'lua' },
         ['marksman'] = { 'markdown' },
         ['taplo'] = { 'toml' },
+        ['sqlls'] = { 'sql', 'mysql', 'sqlite', 'psql' },
     }
 })
 
@@ -37,6 +38,10 @@ local util = require "lspconfig/util"
 
 -- setup language servers
 require('lspconfig').rust_analyzer.setup({})
+require('lspconfig').sqlls.setup({
+    cmd = { "sql-language-server", "up", "--method", "stdio" },
+    filetypes = { 'sql', 'mysql', 'sqlite', 'psql' },
+})
 require('lspconfig').lua_ls.setup({
     settings = {
         Lua = {

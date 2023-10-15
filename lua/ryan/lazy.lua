@@ -22,5 +22,7 @@ require("lazy").setup({
     { 'L3MON4D3/LuaSnip' },
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
-    { 'numToStr/Comment.nvim',            opts = {},           lazy = false, }
+    { 'numToStr/Comment.nvim',            opts = {},           lazy = false, },
+    { 'nvim-lua/plenary.nvim' },
+    { 'ThePrimeagen/harpoon' },
 })
